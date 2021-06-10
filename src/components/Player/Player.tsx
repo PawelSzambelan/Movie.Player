@@ -20,6 +20,11 @@ const useStyles = makeStyles({
         position: "absolute",
         top: "50%",
         left: "50%"
+    },
+    container: {
+        position: 'absolute',
+        width: "100vw",
+        height: "100vh"
     }
 })
 
@@ -51,9 +56,9 @@ export const Player = (props: PlayerProps) => {
     return (
         <div>
             {noVideoUrl === isVideoAvailable.WAITING ? (<CircularProgress className={classes.center} />) :
-                noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<img src={`${PATH_FOR_IMAGES}/404Illu.svg`} alt="404 illustration" style={{ position: 'absolute', width: "100vw", height: "100vh" }} />) :
-                    <div>
+                noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<img src={`${PATH_FOR_IMAGES}/404Illu.svg`} alt="404 illustration" className={classes.container} />) :
                         <ReactHlsPlayer
+                            className={classes.container}
                             playerRef={playerRef}
                             src={videoUrl}
                             autoPlay={true}
@@ -61,7 +66,6 @@ export const Player = (props: PlayerProps) => {
                             width="100%"
                             height="auto"
                         />
-                    </div>
             }
         </div>
     )
