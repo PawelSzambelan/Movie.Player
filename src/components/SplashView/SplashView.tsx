@@ -49,7 +49,7 @@ export function SplashView() {
     return (
     <>
         <Grid container className={classes.mainGrid}>
-            <Grid item xs={12} md={7}></Grid>
+            <Grid item xs={12} md={7}>{}</Grid>
             <Grid item xs={12} md={5} className={classes.insideGrid}>
                 <Typography variant="h3" style={{fontWeight: 900}}>
                     Welcome!

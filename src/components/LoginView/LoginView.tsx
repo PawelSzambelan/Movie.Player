@@ -33,7 +33,6 @@ export function LoginView() {
                     Username: values.email,
                     Password: values.password,
                 }).then(data => {
-                    console.log('Response: ', data);
                     const cookies = new Cookies();
                     cookies.set('token', data.AuthorizationToken.Token);
                     history.push('/home');

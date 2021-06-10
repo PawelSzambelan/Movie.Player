@@ -4,7 +4,7 @@ import {MediaRestApi} from "../../restapi/media/MediaRestApi";
 import {MediaDto} from "../../restapi/media/MediaDto";
 import {ImageDto} from "../../restapi/media/ImageDto";
 import {PATH_FOR_IMAGES} from "../constants/imgPath";
-import {GridList, GridListTile, GridListTileBar, IconButton} from "@material-ui/core";
+import {CircularProgress, GridList, GridListTile, GridListTileBar, IconButton} from "@material-ui/core";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import Pagination from "@material-ui/lab/Pagination";
 import {makeStyles} from "@material-ui/core/styles";
@@ -56,7 +56,12 @@ const useStyles = makeStyles({
     },
     center: {
         marginLeft: "50%"
-    }
+    },
+    loading: {
+        position: "absolute",
+        top: "50%",
+        left: "50%"
+    },
 });
 
 
@@ -116,31 +121,39 @@ export function MediaListView(props: { mediaListId: number }) {
 
     const classes = useStyles();
     return (
-        <>
-            <div className={classes.root}>
-                <GridList className={classes.gridList}>
-                    {mediaList.map((media) => (
-                        <GridListTile key={media.id} className={classes.gridListTitle}>
-                            <div className={classes.imageWrapper}>
-                                <img className={classes.image} src={media.image} alt={media.title}/>
-                                        <IconButton className={classes.playButton} color="default"
-                                                    onClick={() => playVideo(media.id)}>
-                                            <PlayCircleOutlineIcon className={classes.iconSize}/>
-                                        </IconButton>
-                            </div>
-                            <GridListTileBar
-                                title={media.title}
-                            />
-                        </GridListTile>
-                    ))}
-                </GridList>
-            </div>
+        <div>
+            {
+                mediaList.length === 0 ? (<CircularProgress className={classes.loading} />) :
+                    <div>
+                        <div className={classes.root}>
+                            <GridList className={classes.gridList}>
+                                {mediaList.map((media) => (
+                                    <GridListTile key={media.id} className={classes.gridListTitle}>
+                                        <div className={classes.imageWrapper}>
+                                            <img className={classes.image} src={media.image} alt={media.title}/>
+                                            <IconButton className={classes.playButton} color="default"
+                                                        onClick={() => playVideo(media.id)}>
+                                                <PlayCircleOutlineIcon className={classes.iconSize}/>
+                                            </IconButton>
+                                        </div>
+                                        <GridListTileBar
+                                            title={media.title}
+                                        />
+                                    </GridListTile>
+                                ))}
+                            </GridList>
+                        </div>
 
-            <div className={classes.center}>
-                <VerticalSpace height="0.5rem"/>
-                <Pagination count={numberOfPages} color="primary"
-                            onChange={(event, page) => handlePageChange(page)}/>
-            </div>
-        </>
+                        <div className={classes.center}>
+                            <VerticalSpace height="0.5rem"/>
+                            <Pagination count={numberOfPages} color="primary"
+                                        onChange={(event, page) => handlePageChange(page)}/>
+                        </div>
+                    </div>
+            }
+        </div>
+
     )
+
+
 }

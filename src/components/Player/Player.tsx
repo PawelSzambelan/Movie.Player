@@ -16,7 +16,7 @@ enum isVideoAvailable {
 }
 
 const useStyles = makeStyles({
-    center: {
+    loading: {
         position: "absolute",
         top: "50%",
         left: "50%"
@@ -54,7 +54,7 @@ export const Player = (props: PlayerProps) => {
     const classes = useStyles();
     return (
         <div>
-            {noVideoUrl === isVideoAvailable.WAITING ? (<CircularProgress className={classes.center} />) :
+            {noVideoUrl === isVideoAvailable.WAITING ? (<CircularProgress className={classes.loading} />) :
                 noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<img src={`${PATH_FOR_IMAGES}/404Illu.svg`} alt="404 illustration" className={classes.container} />) :
                         <ReactHlsPlayer
                             className={classes.container}
