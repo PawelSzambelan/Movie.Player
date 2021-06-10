@@ -85,7 +85,6 @@ export function MediaListView(props: { mediaListId: number }) {
             PageSize: 15,
         });
 
-        console.log(list);
         setMediaList(mediaToDisplay(list.Entities));
         setNumberOfPages(getNumberOfPages(list.TotalCount));
     }

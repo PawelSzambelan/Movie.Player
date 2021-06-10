@@ -43,7 +43,6 @@ export const Player = (props: PlayerProps) => {
             MediaId: id,
             StreamType: StreamTypeOptions.TRIAL
         });
-        console.log(videoUrl.ContentUrl);
         if (videoUrl.ContentUrl) {
             setVideoUrl(videoUrl.ContentUrl);
             setNoVideoUrl(isVideoAvailable.AVAILABLE);

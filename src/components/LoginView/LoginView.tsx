@@ -47,7 +47,6 @@ export function LoginView() {
     const loginAnonymously = async () => {
         try {
             await AuthorizationRestApi().postAnonymousAuthorizationSignIn({}).then(data => {
-                console.log('Response: ', data);
                 const cookies = new Cookies();
                 cookies.set('token', data.AuthorizationToken.Token);
                 history.push('/home');
