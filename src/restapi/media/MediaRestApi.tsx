@@ -2,7 +2,7 @@ import {PATH_BASE_URL} from "../../components/constants/apiPath";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import {MediaListDto} from "./MediaListDto";
-import {MediaPlayInfo} from "./MediaPlayInfo";
+import {MediaPlayInfoDto} from "./MediaPlayInfoDto";
 
 type MediaRestApiConfig = {
     readonly baseUrl: string;
@@ -37,12 +37,13 @@ export const MediaRestApi = () => {
         async postMediaPlayInfo(body: {
             MediaId: number;
             StreamType: StreamTypeOptions;
-        }):Promise<string> {
+        }):Promise<MediaPlayInfoDto> {
             const cookies = new Cookies();
-            return await axios.post<string>(`${currentConfig.baseUrl}/GetMediaPlayInfo`, body,
+            return await axios.post<MediaPlayInfoDto>(`${currentConfig.baseUrl}/GetMediaPlayInfo`, body,
                 {
                     headers: {
-                        Authorization: `${cookies.get('token')}`
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${cookies.get('token')}`
                     }
                 }).then((res) => res.data);
 

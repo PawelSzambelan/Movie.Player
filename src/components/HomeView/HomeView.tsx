@@ -1,13 +1,16 @@
+import React from 'react';
 import {useEffect, useState} from "react";
-import {MediaRestApi, StreamTypeOptions} from "../../restapi/media/MediaRestApi";
+import {MediaRestApi} from "../../restapi/media/MediaRestApi";
 import {MediaDto} from "../../restapi/media/MediaDto";
 import {ImageDto} from "../../restapi/media/ImageDto";
 import {makeStyles} from "@material-ui/core/styles";
 import {PATH_FOR_IMAGES} from "../constants/imgPath";
-import {Button, TextField} from "@material-ui/core";
+import {Button, IconButton, TextField} from "@material-ui/core";
 import * as yup from "yup";
 import {useFormik} from "formik";
 import Pagination from '@material-ui/lab/Pagination';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import {useHistory} from "react-router-dom";
 
 type MediaToDisplay = {
     id: number;
@@ -28,6 +31,18 @@ const useStyles = makeStyles({
         objectFit: "cover",
         width: "100%",
         height: "100%",
+        "&:hover": {
+            opacity: "70%"
+        }
+    },
+    playButton: {
+        position: "absolute",
+        top: "30%",
+        left: "35%",
+        zIndex: 20,
+    },
+    iconSize: {
+        fontSize: "4em"
     },
 });
 
@@ -40,10 +55,12 @@ const validationSchema = yup.object({
 });
 
 export function HomeView() {
-    const [mediaListId, setMediaListId] = useState<number>(3);
+    const [mediaListId, setMediaListId] = useState<number>(2);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numberOfPages, setNumberOfPages] = useState<number>(1);
     const [mediaList, setMediaList] = useState<MediaToDisplay[]>([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         getMediaList(mediaListId).then();
@@ -89,6 +106,10 @@ export function HomeView() {
         setCurrentPage(page);
     }
 
+    function playVideo(id: number) {
+        history.push(`/home/${id}`);
+    }
+
     const formik = useFormik({
         initialValues: {
             mediaListNumber: mediaListId - 1
@@ -119,18 +140,23 @@ export function HomeView() {
                 </Button>
             </form>
             <br/>
-            {mediaList.map(media => (<div>
-                    <div key={media.id}>{media.title}</div>
+            {mediaList.map(media => (<div key={media.id}>
+                    <div>{media.title}</div>
                     <div className={classes.container}>
                         <div className={classes.imageWrapper}>
                             <img className={classes.image} src={media.image} alt=""/>
+                            <IconButton className={classes.playButton} color="default"
+                                        onClick={() => playVideo(media.id)}>
+                                <PlayCircleOutlineIcon className={classes.iconSize}/>
+                            </IconButton>
                         </div>
                     </div>
                     <br/>
                 </div>
             ))}
             <div>
-                <Pagination count={numberOfPages} color="primary" onChange={(event, page) => handlePageChange(page)}/>
+                <Pagination count={numberOfPages} color="primary"
+                            onChange={(event, page) => handlePageChange(page)}/>
             </div>
         </div>
     )
