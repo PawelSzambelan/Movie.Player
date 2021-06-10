@@ -1,6 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {MediaRestApi, StreamTypeOptions} from "../../restapi/media/MediaRestApi";
 import ReactHlsPlayer from 'react-hls-player';
+import {CircularProgress} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {PATH_FOR_IMAGES} from "../constants/imgPath";
 
 type PlayerProps = {
     readonly mediaId: number;
@@ -11,6 +14,14 @@ enum isVideoAvailable {
     AVAILABLE,
     UNAVAILABLE
 }
+
+const useStyles = makeStyles({
+    center: {
+        position: "absolute",
+        top: "50%",
+        left: "50%"
+    }
+})
 
 export const Player = (props: PlayerProps) => {
     const [videoUrl, setVideoUrl] = useState<string>('');
@@ -36,10 +47,11 @@ export const Player = (props: PlayerProps) => {
         }
     }
 
+    const classes = useStyles();
     return (
         <div>
-            {noVideoUrl === isVideoAvailable.WAITING ? (<div>Loading....</div>) :
-                noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<div>Video not found!</div>) :
+            {noVideoUrl === isVideoAvailable.WAITING ? (<CircularProgress className={classes.center} />) :
+                noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<img src={`${PATH_FOR_IMAGES}/404Illu.svg`} alt="404 illustration" style={{ position: 'absolute', width: "100vw", height: "100vh" }} />) :
                     <div>
                         <ReactHlsPlayer
                             playerRef={playerRef}
