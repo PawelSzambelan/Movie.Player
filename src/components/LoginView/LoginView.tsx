@@ -1,10 +1,11 @@
-import React from 'react';
-import {Button, Grid, TextField} from "@material-ui/core";
 import * as yup from "yup";
+import {useHistory} from "react-router-dom";
 import {useFormik} from "formik";
 import {AuthorizationRestApi} from "../../restapi/authorization/AuthorizationRestApi";
 import Cookies from "universal-cookie";
-import { useHistory } from "react-router-dom";
+import {Button, Grid, TextField, Typography} from "@material-ui/core";
+import {VerticalSpace} from "../VerticalSpace";
+import React from "react";
 
 const validationSchema = yup.object({
     email: yup
@@ -59,23 +60,24 @@ export function LoginView() {
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
-                <Grid
-                    container
-                    direction={"column"}
-                    justify="center"
-                    alignItems="center"
+                <Grid xs={6}
+                      container
+                      direction={"column"}
+                      justify="center"
                 >
+                    <VerticalSpace height="1rem"/>
                     <TextField
                         id="emailAddress"
                         value={formik.values.email}
                         label="User"
                         name="email"
                         variant="outlined"
+                        placeholder="Type your email"
                         onChange={formik.handleChange}
                         error={formik.touched.email && Boolean(formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                     />
-
+                    <VerticalSpace height="1.5rem"/>
                     <TextField
                         id="password"
                         value={formik.values.password}
@@ -83,23 +85,35 @@ export function LoginView() {
                         label="Password"
                         name="password"
                         variant="outlined"
+                        placeholder="Type your password"
                         onChange={formik.handleChange}
                         error={
                             formik.touched.password && Boolean(formik.errors.password)
                         }
                         helperText={formik.touched.password && formik.errors.password}
                     />
-
+                    <VerticalSpace height="1.5rem"/>
                     <Button type="submit" variant="contained" color="primary">
                         Login
                     </Button>
                 </Grid>
             </form>
-
-            <Button onClick={loginAnonymously} variant="contained" color="primary">
-                Login anonymously
-            </Button>
-
+            <VerticalSpace height="2rem"/>
+            <Grid xs={6}
+                  container
+                  direction={"column"}
+                  justify="center"
+                  alignContent="center"
+            >
+                <div>
+                    <Typography variant="body1">
+                        Don't have account? Try and check trial version!
+                    </Typography>
+                    <Button onClick={loginAnonymously} style={{ width: "100%" }} variant="contained" color="primary">
+                        Login anonymously
+                    </Button>
+                </div>
+            </Grid>
         </>
     )
 }

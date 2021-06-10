@@ -25,7 +25,7 @@ export const Player = (props: PlayerProps) => {
     async function getContentUrl(id: number): Promise<void> {
         const videoUrl = await MediaRestApi().postMediaPlayInfo({
             MediaId: id,
-            StreamType: StreamTypeOptions.MAIN
+            StreamType: StreamTypeOptions.TRIAL
         });
         console.log(videoUrl.ContentUrl);
         if (videoUrl.ContentUrl) {
@@ -36,26 +36,8 @@ export const Player = (props: PlayerProps) => {
         }
     }
 
-
-// function playVideo() {
-//     playerRef.current.play();
-// }
-//
-// function pauseVideo() {
-//     playerRef.current.pause();
-// }
-//
-// function toggleControls() {
-//     if (playerRef.current) {
-//     playerRef.current.controls = !playerRef.current.controls;
-//     }
-// }
-
     return (
         <div>
-            {/*<div>*/}
-            {/*    ID: {props.mediaId}*/}
-            {/*</div>*/}
             {noVideoUrl === isVideoAvailable.WAITING ? (<div>Loading....</div>) :
                 noVideoUrl === isVideoAvailable.UNAVAILABLE ? (<div>Video not found!</div>) :
                     <div>
@@ -66,15 +48,9 @@ export const Player = (props: PlayerProps) => {
                             controls={true}
                             width="100%"
                             height="auto"
-                            // hlsConfig={{
-                            //     maxLoadingDelay: 4,
-                            //     minAutoBitrate: 0,
-                            //     lowLatencyMode: true,
-                            // }}
                         />
                     </div>
             }
-
         </div>
     )
 }
