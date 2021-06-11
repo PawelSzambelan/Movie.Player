@@ -1,4 +1,4 @@
-export type AnonymousAuthorizationSignInDto = {
+export type AnonymousUserDto = {
     AuthorizationToken: {
         Token: string;
         TokenExpires: string;
