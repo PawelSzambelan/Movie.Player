@@ -30,7 +30,8 @@ export const MediaRestApi = () => {
             return await axios.post<MediaListDto>(`${currentConfig.baseUrl}/GetMediaList`, body,
                 {
                     headers: {
-                        Authorization: `${cookies.get('token')}`
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${cookies.get('token')}`
                     }
                 }).then((res) => res.data);
         },
