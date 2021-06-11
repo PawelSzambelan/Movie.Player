@@ -22,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
         transform: "translate(-50%, -50%)",
         textAlign: "center",
     },
-
-
     mainGrid: {
         width: '100vw',
         height: '95vh',
