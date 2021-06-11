@@ -1,6 +1,6 @@
 import {PATH_BASE_URL} from "../../components/constants/apiPath";
 import axios from "axios";
-import {AnonymousAuthorizationSignInDto} from "./AnonymousAuthorizationSignInDto";
+import {AnonymousUserDto} from "./AnonymousUserDto";
 import {AuthorizationSignInDto} from "./AuthorizationSignInDto";
 
 export type AuthorizationRestApiConfig = {
@@ -12,8 +12,8 @@ export const AuthorizationRestApi = () => {
         baseUrl: PATH_BASE_URL + '/Authorization'
     }
     return {
-        async postAnonymousAuthorizationSignIn(body: {}): Promise<AnonymousAuthorizationSignInDto> {
-            return await axios.post<AnonymousAuthorizationSignInDto>(`${currentConfig.baseUrl}/SignIn`, body)
+        async postAnonymousAuthorizationSignIn(body: {}): Promise<AnonymousUserDto> {
+            return await axios.post<AnonymousUserDto>(`${currentConfig.baseUrl}/SignIn`, body)
                 .then((res) => res.data);
         },
         async postAuthorizationSignIn(body: {
