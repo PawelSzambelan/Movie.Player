@@ -48,5 +48,5 @@ Couple of things that I would like to add:
 6. Responsiveness
 7. Logout
 8. Back button in player view
-
+9. Add button for playback to decide whether to play video automatically or by pressing play button
 
