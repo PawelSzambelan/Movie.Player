@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Recruitment task for Better Software Group company
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project made for the recruitment process for Junior Frontend Developer position.
 
-## Available Scripts
+## Main functionalities
 
-In the project directory, you can run:
+- Login
+- Login as anonymous user
+- Video lists access
+- Pagination through video lists
+- Playing video
 
-### `npm start`
+## Dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The following technologies were used:
+- React
+- React-DOM
+- Router
+- Hooks (useState, useEffect, useRef,useHistory)
+- Material-UI
+- Axios
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Running the project
 
-### `npm test`
+Running this project locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+###### From the repo:
 
-### `npm run build`
+1. Clone this project locally
+2. Run `npm install` in your bash/command line
+3. Go to `/bsg_movie_player` directory in your bash/command line and Run `npm start` in your bash/command line
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Problems encountered
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Due to lack of some data like cover images I used placeholders
+2. There was no option for getting MAIN videos, so I hardcode StreamType only for TRIAL versions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Things to add
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Couple of things that I would like to add:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Tests - use Mock Service Worker and write tests for whole code (I only just started it)
+2. Registration
+3. Token expiration handling (https://www.npmjs.com/package/axios-auth-refresh)
+4. Error handling
+5. Create Figma designs
+6. Responsiveness
+7. Logout
+8. Back button in player view
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
